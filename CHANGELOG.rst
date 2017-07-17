@@ -123,6 +123,7 @@ API is now at version **1.17**. See `API changelog`_.
 
 - Make memory storage consistent with PostgreSQL with regard to bytes (#1237)
 - Some minor cleanups about the use of kinto.readonly (#1241)
+- use json instead of ujson in storage in tests (#1255)
 
 
 7.0.1 (2017-05-17)
