@@ -199,11 +199,6 @@ def includeme(config):
     config.add_request_method(current_service, reify=True)
     config.commit()
 
-    # Include plugins after init, unlike pyramid includes.
-    includes = aslist(settings['includes'])
-    for app in includes:
-        config.include(app)
-
     # # Show settings to output.
     # for key, value in settings.items():
     #     logger.info('Using {} = {}'.format(key, value))

@@ -3,7 +3,7 @@ import logging
 
 import kinto.core
 from pyramid.config import Configurator
-from pyramid.settings import asbool
+from pyramid.settings import asbool, aslist
 from pyramid.security import Authenticated, Everyone
 
 from kinto.authorization import RouteFactory
@@ -82,6 +82,13 @@ def main(global_config, config=None, **settings):
         kwargs.setdefault('ignore', []).append('kinto.views.permissions')
 
     config.scan('kinto.views', **kwargs)
+
+    # Commit so plugins can use existing views.
+    config.commit()
+    # Include plugins after init, unlike pyramid includes.
+    includes = aslist(settings['includes'])
+    for app in includes:
+        config.include(app)
 
     app = config.make_wsgi_app()
 
